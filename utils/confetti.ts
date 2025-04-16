@@ -29,7 +29,8 @@ export function launchConfetti() {
   }, 150)
 }
 
-export function handleJutsuActivation(type: string, setChakraPoints: (cb: (prev: number) => number) => void) {
+// Função melhorada para efeitos especiais de jutsu
+export function handleJutsuActivation(type: string) {
   switch (type) {
     case "rasengan":
       // Spiral confetti
@@ -45,7 +46,6 @@ export function handleJutsuActivation(type: string, setChakraPoints: (cb: (prev:
         scalar: 0.8,
         drift: 0,
       })
-      setChakraPoints((prev) => prev + 10)
       break
     case "kage":
       // Multiple bursts for shadow clones
@@ -60,7 +60,6 @@ export function handleJutsuActivation(type: string, setChakraPoints: (cb: (prev:
           })
         }, i * 300)
       }
-      setChakraPoints((prev) => prev + 15)
       break
     case "chidori":
       // Lightning effect
@@ -75,7 +74,6 @@ export function handleJutsuActivation(type: string, setChakraPoints: (cb: (prev:
         gravity: 0.7,
         scalar: 1.2,
       })
-      setChakraPoints((prev) => prev + 20)
       break
   }
 }
