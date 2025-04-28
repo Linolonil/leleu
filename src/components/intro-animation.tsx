@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { launchConfetti } from "../../utils/confetti"
+import { AudioControls } from "@/components/audio-controls"
+import { useAudioContext } from "@/contexts/audio-context"
 
 type IntroAnimationProps = {
   onComplete: () => void
@@ -13,6 +15,8 @@ type IntroAnimationProps = {
 export function IntroAnimation({ onComplete }: IntroAnimationProps) {
   const [step, setStep] = useState(0)
   const [showSkip, setShowSkip] = useState(false)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
+  const { isPlaying, isMuted, togglePlay, toggleMute } = useAudioContext()
 
   useEffect(() => {
     // Show skip button after 3 seconds
@@ -37,6 +41,19 @@ export function IntroAnimation({ onComplete }: IntroAnimationProps) {
     }
   }, [step])
 
+  // Play music when step 2 is reached and user has interacted
+  useEffect(() => {
+    if (step === 2 && hasUserInteracted) {
+      const timer = setTimeout(() => {
+        if (!isPlaying) {
+          togglePlay()
+        }
+      }, 1000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [step, isPlaying, togglePlay, hasUserInteracted])
+
   // Complete the intro when reaching the final step
   useEffect(() => {
     if (step === 3) {
@@ -50,8 +67,23 @@ export function IntroAnimation({ onComplete }: IntroAnimationProps) {
     }
   }, [step, onComplete])
 
+  const handleUserInteraction = () => {
+    setHasUserInteracted(true)
+  }
+
   return (
-    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+    <div 
+      className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+      onClick={handleUserInteraction}
+      onKeyDown={handleUserInteraction}
+      role="button"
+      tabIndex={0}
+    >
+      {/* Audio controls */}
+      <div className="fixed top-4 right-4 z-50">
+        <AudioControls isPlaying={isPlaying} isMuted={isMuted} togglePlay={togglePlay} toggleMute={toggleMute} />
+      </div>
+
       {/* Skip button */}
       <AnimatePresence>
         {showSkip && (

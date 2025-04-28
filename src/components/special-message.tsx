@@ -87,7 +87,7 @@ export function SpecialMessage({ onClose }: SpecialMessageProps) {
             <p className="text-white leading-relaxed">
               Lembre-se sempre das palavras de Naruto:{" "}
               <span className="italic text-orange-300">
-                "Eu nunca volto atrás na minha palavra, esse é o meu jeito ninja!"
+              &quot;Eu nunca volto atrás na minha palavra, esse é o meu jeito ninja!&quot;
               </span>
             </p>
 

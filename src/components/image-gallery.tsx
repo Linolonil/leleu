@@ -66,7 +66,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <Image
-              src={image.src || "/placeholder.svg"}
+              src={image.src}
               alt={image.alt}
               fill
               className="object-cover transition-transform duration-300 hover:scale-110"

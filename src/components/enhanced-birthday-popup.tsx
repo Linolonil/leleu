@@ -74,7 +74,7 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
                 >
                   <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden border-4 border-orange-400 mb-6">
                     <Image
-                      src="/placeholder.svg?height=200&width=200"
+                      src="/lele.jpeg"
                       alt="Leandro Negreiros"
                       fill
                       className="object-cover"
