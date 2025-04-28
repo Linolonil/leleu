@@ -11,7 +11,12 @@ export function useAudio(audioSrc: string) {
     // Initialize audio
     if (typeof window !== "undefined") {
       audioRef.current = new Audio(audioSrc)
-      audioRef.current.loop = true
+      audioRef.current.loop = false // Desativa o loop
+
+      // Adiciona o evento de quando o áudio termina
+      audioRef.current.addEventListener('ended', () => {
+        setIsPlaying(false)
+      })
     }
 
     return () => {
@@ -27,6 +32,10 @@ export function useAudio(audioSrc: string) {
       if (isPlaying) {
         audioRef.current.pause()
       } else {
+        // Se o áudio terminou, volta para o início
+        if (audioRef.current.currentTime === audioRef.current.duration) {
+          audioRef.current.currentTime = 0
+        }
         audioRef.current.play().catch((error) => {
           console.error("Error playing audio:", error)
         })

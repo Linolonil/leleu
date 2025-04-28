@@ -76,7 +76,7 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
 
       <video
         ref={videoRef}
-        className="w-full h-[600px] object-cover cursor-pointer"
+        className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-cover cursor-pointer"
         poster={poster}
         onClick={togglePlay}
         muted

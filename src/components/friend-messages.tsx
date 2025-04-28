@@ -20,7 +20,7 @@ export function FriendMessages({ messages }: FriendMessagesProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 2.5, duration: 0.8 }}
     >
-      <div className="bg-[url('/placeholder.svg?height=300&width=800')] bg-cover bg-center py-16 rounded-lg relative overflow-hidden">
+      <div className="bg-[url('/cheers.gif')] bg-cover bg-center py-16 rounded-lg relative overflow-hidden">
         <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div className="relative z-10 text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Mensagens dos Amigos Ninjas</h2>

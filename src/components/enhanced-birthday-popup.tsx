@@ -22,7 +22,7 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
 
   return (
     <motion.div
-      className="fixed inset-0 z-40 flex items-center justify-center"
+      className="fixed inset-0 z-40 flex items-center justify-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -31,7 +31,7 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
       <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={onClose} />
 
       <motion.div
-        className="relative max-w-4xl w-full mx-auto z-10 p-4"
+        className="relative w-full max-w-4xl mx-auto z-10"
         initial={{ scale: 0.5, y: 100, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         transition={{
@@ -41,7 +41,7 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
         }}
       >
         <div className="bg-gradient-to-br from-orange-600 to-orange-800 p-1 rounded-xl shadow-[0_0_40px_rgba(255,140,0,0.7)]">
-          <div className="bg-black/80 backdrop-blur-md p-8 rounded-lg border-2 border-orange-400/50 relative overflow-hidden">
+          <div className="bg-black/80 backdrop-blur-md p-4 md:p-8 rounded-lg border-2 border-orange-400/50 relative overflow-hidden">
             {/* Animated background elements */}
             {[...Array(30)].map((_, i) => (
               <motion.div
@@ -63,16 +63,16 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
               />
             ))}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
               {/* Left side - Image and title */}
               <div className="flex flex-col items-center justify-center">
                 <motion.div
-                  className="mb-6 relative"
+                  className="mb-4 md:mb-6 relative"
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden border-4 border-orange-400 mb-6">
+                  <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-full overflow-hidden border-4 border-orange-400 mb-4 md:mb-6">
                     <Image
                       src="/lele.jpeg"
                       alt="Leandro Negreiros"
@@ -92,15 +92,15 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
                     repeatType: "reverse",
                   }}
                 >
-                  <h2 className="text-5xl font-bold text-orange-400 mb-4">PARABÉNS!</h2>
+                  <h2 className="text-3xl md:text-5xl font-bold text-orange-400 mb-2 md:mb-4">PARABÉNS!</h2>
                 </motion.div>
 
-                <div className="flex justify-center items-center gap-3 my-4">
-                  <Star className="h-6 w-6 text-yellow-400 fill-yellow-400" />
-                  <span className="text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 text-transparent bg-clip-text">
+                <div className="flex justify-center items-center gap-2 md:gap-3 my-2 md:my-4">
+                  <Star className="h-4 w-4 md:h-6 md:w-6 text-yellow-400 fill-yellow-400" />
+                  <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-400 text-transparent bg-clip-text">
                     29
                   </span>
-                  <Star className="h-6 w-6 text-yellow-400 fill-yellow-400" />
+                  <Star className="h-4 w-4 md:h-6 md:w-6 text-yellow-400 fill-yellow-400" />
                 </div>
               </div>
 
@@ -111,26 +111,26 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
                 >
-                  <h3 className="text-3xl font-bold text-white mb-4">Leandro Negreiros</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4">Leandro Negreiros</h3>
 
-                  <p className="text-white/90 mb-6 text-lg">
+                  <p className="text-white/90 mb-4 md:mb-6 text-base md:text-lg">
                     Hoje é o dia do ninja mais incrível da Vila da Folha! Que seu caminho ninja continue brilhante e
                     cheio de conquistas!
                   </p>
 
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3">
-                      <Gift className="h-5 w-5 text-orange-400" />
-                      <p className="text-white/90">Prepare-se para uma celebração ninja incrível!</p>
+                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <Gift className="h-4 w-4 md:h-5 md:w-5 text-orange-400" />
+                      <p className="text-white/90 text-sm md:text-base">Prepare-se para uma celebração ninja incrível!</p>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Sparkles className="h-5 w-5 text-orange-400" />
-                      <p className="text-white/90">Jutsus especiais, mensagens e surpresas te aguardam!</p>
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-orange-400" />
+                      <p className="text-white/90 text-sm md:text-base">Jutsus especiais, mensagens e surpresas te aguardam!</p>
                     </div>
                   </div>
 
                   <motion.button
-                    className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium transition-colors w-full"
+                    className="px-4 md:px-6 py-2 md:py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium transition-colors w-full text-sm md:text-base"
                     onClick={() => {
                       handleConfetti()
                       onClose()

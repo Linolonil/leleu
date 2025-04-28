@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Header } from "@/components/header"
 import { BirthdayHero } from "@/components/birthday-hero"
 import { FriendMessages } from "@/components/friend-messages"
-import { Footer } from "@/components/footer"
 import { SpecialMessage } from "@/components/special-message"
 import { EnhancedBirthdayPopup } from "@/components/enhanced-birthday-popup"
 import { FloatingElements } from "@/components/floating-elements"
@@ -60,7 +59,7 @@ function MainContent() {
   }
 
   return (
-    <main className="min-h-screen w-full  overflow-x-hidden relative ">
+    <main className="min-h-screen overflow-x-hidden relative px-4 md:px-6 lg:px-8">
       {/* Parallax Background */}
       <NarutoParallaxBackground />
 
@@ -101,12 +100,12 @@ function MainContent() {
       <Header onShowSpecialMessage={() => setShowSpecialMessage(true)} />
 
       {/* Featured Video */}
-      <div className="container mx-auto py-10">
-        <h2 className="text-3xl font-bold text-white text-center mb-8">Mensagem de Vídeo Especial</h2>
+      <div className="container mx-auto py-6 md:py-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-8">Mensagem de Vídeo Especial</h2>
         <div className="max-w-3xl mx-auto">
           <VideoPlayer
             src="/leandroUFAM.mp4"
-            title="Mensagem de Aniversário"
+            title="Um videozinho do Leandro de forma espontanea"
           />
         </div>
       </div>
@@ -115,9 +114,9 @@ function MainContent() {
       <BirthdayHero />
 
       {/* Timeline Section */}
-      <div id="timeline-section" className="container mx-auto py-16">
+      <div id="timeline-section" className="container mx-auto py-8 md:py-16">
         <motion.h2
-          className="text-3xl font-bold text-white text-center mb-12"
+          className="text-2xl md:text-3xl font-bold text-white text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={hasScrolled ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
@@ -125,39 +124,35 @@ function MainContent() {
           A Jornada Ninja de Leandro
         </motion.h2>
 
-        <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-8 border border-orange-400/30">
+        <div className="bg-black/30 backdrop-blur-sm rounded-2xl p-4 md:p-8 border border-orange-400/30">
           <MemoryTimeline events={timelineEvents} />
         </div>
       </div>
 
       {/* Photo Gallery */}
-      <div className="container mx-auto py-10">
-        <h2 className="text-3xl font-bold text-white text-center mb-8">Galeria de Memórias Ninja</h2>
+      <div className="container mx-auto py-6 md:py-10">
+        <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-8">Galeria de Memórias Ninja</h2>
         <ImageGallery images={galleryImages} />
       </div>
-
-   
 
       {/* Mensagens dos Amigos */}
       <FriendMessages messages={friendMessages} />
 
       {/* Tempo de Vida Counter */}
       <motion.div
-        className="container mx-auto py-10 text-center"
+        className="container mx-auto py-6 md:py-10 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.8, duration: 0.8 }}
       >
-        <h2 className="text-3xl font-bold text-white mb-4">Tempo de Vida Ninja</h2>
-        <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Tempo de Vida Ninja</h2>
+        <p className="text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
           Nosso ninja Leandro está neste mundo desde 4 de maio de 1995, acumulando poder e sabedoria a cada segundo!
         </p>
 
         <TimeAliveCounter birthDate="1996-05-04" />
       </motion.div>
 
-      {/* Footer */}
-      <Footer />
     </main>
   )
 }

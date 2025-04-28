@@ -51,10 +51,10 @@ export function BirthdayHero() {
                 <span className="font-bold">Rank Ninja:</span> Hokage da Programação
               </p>
               <p className="text-xl">
-                <span className="font-bold">Jutsus Especiais:</span> Código no Jutsu, Bug Resolver Technique
+                <span className="font-bold">Jutsus Especiais:</span> Código no Jutsu, Bug Resolver Technique, Vue no Jutsu, Edo TypeScript
               </p>
               <p className="text-xl">
-                <span className="font-bold">Missões Completadas:</span> Incontáveis
+                <span className="font-bold">Missões Completadas:</span> Desenvolvimento de Bugs, Criação de Saas saasTemas 
               </p>
             </motion.div>
           </div>
