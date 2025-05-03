@@ -40,10 +40,10 @@ export function MemoryTimeline({ events }: MemoryTimelineProps) {
             <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-orange-500 border-4 border-orange-700 z-10" />
 
             {/* Image */}
-            <div className={`w-1/2 ${index % 2 === 0 ? "pl-8" : "pr-8"}`}>
+            <div className={`w-1/2  ${index % 2 === 0 ? "pl-8" : "pr-8"}`}>
               {event.image && (
-                <div className="relative h-40 w-full rounded-lg overflow-hidden border-2 border-orange-400/30">
-                  <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
+                <div className="relative h-[500px] w-full rounded-lg overflow-hidden border-2 border-orange-400/30">
+                  <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover object-top" />
                 </div>
               )}
             </div>

@@ -29,9 +29,27 @@ export function NarutoParallaxBackground() {
         }} 
         className="absolute inset-0"
       >
-        <div className="absolute bottom-0 left-0 right-0 h-[60%]">
+        <div className="absolute bottom-0 left-0 right-0 h-[60%] w-1/3">
+          <Image
+            src="/anita-removebg-preview.png"
+            alt="Matuê"
+            fill
+            className="object-contain object-bottom"
+            priority
+          />
+        </div>
+        <div className="absolute bottom-0  left-0 right-0 h-[60%]">
           <Image
             src="/narutue-removebg-preview.png"
+            alt="Matuê"
+            fill
+            className="object-contain object-bottom mt-10"
+            priority
+          />
+        </div>
+        <div className="absolute bottom-0  right-0 h-[60%] w-1/3">
+          <Image
+            src="/garantido-removebg-preview.png"
             alt="Matuê"
             fill
             className="object-contain object-bottom"

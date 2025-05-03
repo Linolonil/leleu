@@ -3,12 +3,56 @@
 import { motion } from "framer-motion"
 import { Heart, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useEffect } from "react"
 
 type SpecialMessageProps = {
   onClose: () => void
 }
 
+const specialMessageLines = [
+  {
+    type: "greeting",
+    text: "Meu mano,",
+  },
+  {
+    text: "Hoje, dia 4 de maio de 2025, venho através dessa mensagem te desejar tudo de melhor na sua vida. Que papai do céu abençoe todos os seus caminhos e decisões.",
+    Quote:false,
+  },
+  {
+    text: "Que você possa realizar todos os seus sonhos e vontades. Você é um cara abençoado e sabe disso!",
+  },
+  {
+    text: "Te admiro profundamente, tanto como amigo quanto como profissional. Você foi um dos pilares para minha mudança de carreira - uma das melhores decisões que já tomei.",
+  },
+  {
+    text: "Claro, a decisão foi minha, mas tive ótimos exemplos para seguir, e você foi um deles, senão o melhor deles.",
+  },
+  {
+    text: "Fiz esse site como presente, já que no momento não posso te dar um presente físico como gostaria. É uma lembrança da nossa amizade.",
+  },
+  {
+    text: "Tentei juntar o máximo que consegui... espero que goste dessa pequena surpresa! (Ou não, não sei se você já sabe kkkk)",
+  },
+  {
+    text: "É isso, fica na paz e com Deus.",
+  },
+  {
+    text: " Seu mano aqui te ama <3",
+  },
+  {
+    type: "closing",
+    text: "-Lino Jorge",
+  },
+]
+
 export function SpecialMessage({ onClose }: SpecialMessageProps) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [])
+
   return (
     <motion.div
       className="fixed inset-0 flex items-center justify-center z-50 bg-black/70 backdrop-blur-sm p-4"
@@ -17,13 +61,13 @@ export function SpecialMessage({ onClose }: SpecialMessageProps) {
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-gradient-to-br from-orange-600 to-orange-800 p-1 rounded-xl shadow-[0_0_40px_rgba(255,140,0,0.7)] max-w-2xl w-full mx-auto"
+        className="bg-gradient-to-br from-orange-600 to-orange-800 p-1 rounded-xl shadow-[0_0_40px_rgba(255,140,0,0.7)] max-w-2xl w-full mx-auto max-h-[90vh]"
         initial={{ scale: 0.5, y: 50 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
       >
-        <div className="bg-black/80 backdrop-blur-md p-8 rounded-lg border-2 border-orange-400/50 text-center relative overflow-hidden">
-          {/* Decorative elements */}
+        <div className="bg-black/80 backdrop-blur-md p-8 rounded-lg border-2 border-orange-400/50 text-center relative overflow-y-auto max-h-[calc(90vh-2rem)]">
+          {/* Decorative sparkles */}
           {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
@@ -38,7 +82,7 @@ export function SpecialMessage({ onClose }: SpecialMessageProps) {
               }}
               transition={{
                 duration: 2 + Math.random() * 2,
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 delay: Math.random() * 2,
               }}
             />
@@ -65,41 +109,24 @@ export function SpecialMessage({ onClose }: SpecialMessageProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <p className="text-white leading-relaxed">
-              <span className="text-orange-300 font-bold text-xl">Leandro,</span>
-            </p>
+            {specialMessageLines.map((line, index) => {
+              const isGreeting = line.type === "greeting"
+              const isClosing = line.type === "closing"
+              const isQuote = line.Quote
 
-            <p className="text-white leading-relaxed">
-              Assim como Naruto nunca desistiu de seu sonho de se tornar Hokage, você também tem perseguido seus
-              objetivos com a mesma determinação e coragem.
-            </p>
-
-            <p className="text-white leading-relaxed">
-              Aos 29 anos, você já construiu seu próprio caminho ninja, superando desafios e conquistando vitórias que
-              inspiram todos ao seu redor.
-            </p>
-
-            <p className="text-white leading-relaxed">
-              Que este novo ano de vida seja repleto de momentos incríveis, novas técnicas dominadas e missões
-              bem-sucedidas!
-            </p>
-
-            <p className="text-white leading-relaxed">
-              Lembre-se sempre das palavras de Naruto:{" "}
-              <span className="italic text-orange-300">
-              &quot;Eu nunca volto atrás na minha palavra, esse é o meu jeito ninja!&quot;
-              </span>
-            </p>
-
-            <p className="text-white leading-relaxed mt-6">
-              Continue brilhando e inspirando a todos com seu jeito ninja de ser!
-            </p>
-
-            <p className="text-white font-bold text-right mt-4">
-              Com carinho,
-              <br />
-              Seus amigos da Vila da Folha
-            </p>
+              return (
+                <p
+                  key={index}
+                  className={`leading-relaxed text-white ${
+                    isGreeting ? "text-orange-300 font-bold text-xl" : ""
+                  } ${isQuote ? "italic text-orange-300" : ""} ${
+                    isClosing ? "font-bold text-right mt-4 whitespace-pre-line" : ""
+                  }`}
+                >
+                  {line.text}
+                </p>
+              )
+            })}
           </motion.div>
 
           <motion.div

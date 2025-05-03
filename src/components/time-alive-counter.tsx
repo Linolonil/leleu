@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
 type TimeAliveProps = {
-  birthDate: string
+  birthDate: string 
 }
 
 type TimeUnits = {
@@ -28,77 +28,73 @@ export function TimeAliveCounter({ birthDate }: TimeAliveProps) {
 
   useEffect(() => {
     const birthDateTime = new Date(birthDate)
+    const targetDate = new Date("2025-05-04") // Data do 29º aniversário
 
-    const updateCounter = () => {
-      const now = new Date()
+    const calculateTimeAlive = (now: Date) => {
+      const endDate = now < targetDate ? now : targetDate
+      
+      // Cálculo preciso considerando o horário de nascimento
+      let years = endDate.getFullYear() - birthDateTime.getFullYear()
+      let months = endDate.getMonth() - birthDateTime.getMonth()
+      let days = endDate.getDate() - birthDateTime.getDate()
 
-      // Calculate years
-      let years = now.getFullYear() - birthDateTime.getFullYear()
+      // Ajuste para horário de nascimento
+      const birthHours = birthDateTime.getHours()
+      const birthMinutes = birthDateTime.getMinutes()
+      const currentHours = endDate.getHours()
+      const currentMinutes = endDate.getMinutes()
 
-      // Calculate months
-      let months = now.getMonth() - birthDateTime.getMonth()
-      if (months < 0) {
+      // Se ainda não passou do horário de nascimento no dia atual, subtrai 1 dia
+      if (currentHours < birthHours || (currentHours === birthHours && currentMinutes < birthMinutes)) {
+        days--
+      }
+
+      // Ajusta anos e meses se necessário
+      if (months < 0 || (months === 0 && days < 0)) {
         years--
         months += 12
       }
 
-      // Calculate other units
-      const birthDateThisMonth = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        birthDateTime.getDate(),
-        birthDateTime.getHours(),
-        birthDateTime.getMinutes(),
-        birthDateTime.getSeconds(),
-      )
-
-      let days, hours, minutes, seconds
-
-      if (now < birthDateThisMonth) {
-        // If the birth day this month hasn't occurred yet
-        const lastMonth = new Date(
-          now.getFullYear(),
-          now.getMonth() - 1,
-          birthDateTime.getDate(),
-          birthDateTime.getHours(),
-          birthDateTime.getMinutes(),
-          birthDateTime.getSeconds(),
-        )
-        const diffMs = now.getTime() - lastMonth.getTime()
-
-        // Convert to days, hours, minutes, seconds
-        const diffSecs = Math.floor(diffMs / 1000)
-        days = Math.floor(diffSecs / (24 * 60 * 60))
-        const remainingSecs = diffSecs % (24 * 60 * 60)
-        hours = Math.floor(remainingSecs / (60 * 60))
-        const remainingMins = remainingSecs % (60 * 60)
-        minutes = Math.floor(remainingMins / 60)
-        seconds = remainingMins % 60
-      } else {
-        // If the birth day this month has occurred
-        const diffMs = now.getTime() - birthDateThisMonth.getTime()
-
-        // Convert to days, hours, minutes, seconds
-        const diffSecs = Math.floor(diffMs / 1000)
-        days = Math.floor(diffSecs / (24 * 60 * 60))
-        const remainingSecs = diffSecs % (24 * 60 * 60)
-        hours = Math.floor(remainingSecs / (60 * 60))
-        const remainingMins = remainingSecs % (60 * 60)
-        minutes = Math.floor(remainingMins / 60)
-        seconds = remainingMins % 60
+      // Ajusta dias negativos
+      if (days < 0) {
+        const lastDayOfPrevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate()
+        days += lastDayOfPrevMonth
+        months--
       }
 
-      setTimeAlive({
+      // Calcula horas, minutos e segundos desde o horário de nascimento
+      let hours = currentHours - birthHours
+      let minutes = currentMinutes - birthMinutes
+      let seconds = endDate.getSeconds() - birthDateTime.getSeconds()
+
+      // Ajusta valores negativos
+      if (seconds < 0) {
+        minutes--
+        seconds += 60
+      }
+      if (minutes < 0) {
+        hours--
+        minutes += 60
+      }
+      if (hours < 0) {
+        days--
+        hours += 24
+      }
+
+      return {
         years,
         months,
         days,
         hours,
         minutes,
         seconds,
-      })
+      }
     }
 
-    // Update immediately and then every second
+    const updateCounter = () => {
+      setTimeAlive(calculateTimeAlive(new Date()))
+    }
+
     updateCounter()
     const interval = setInterval(updateCounter, 1000)
 

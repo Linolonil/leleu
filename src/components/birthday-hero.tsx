@@ -20,7 +20,7 @@ export function BirthdayHero() {
               whileHover={{ scale: 1.05, borderColor: "#FFD700" }}
             >
               <Image
-                src="/lele.jpeg"
+                src="/lele2.jpg"
                 alt="Leandro Negreiros"
                 fill
                 className="object-cover"

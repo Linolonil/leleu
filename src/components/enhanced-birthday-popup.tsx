@@ -115,19 +115,9 @@ export function EnhancedBirthdayPopup({ onClose, onShowSpecialMessage }: Enhance
 
                   <p className="text-white/90 mb-4 md:mb-6 text-base md:text-lg">
                     Hoje é o dia do ninja mais incrível da Vila da Folha! Que seu caminho ninja continue brilhante e
-                    cheio de conquistas!
+                    cheio de conquistas! <br /> - Naruto Uzumaki
                   </p>
 
-                  <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <Gift className="h-4 w-4 md:h-5 md:w-5 text-orange-400" />
-                      <p className="text-white/90 text-sm md:text-base">Prepare-se para uma celebração ninja incrível!</p>
-                    </div>
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-orange-400" />
-                      <p className="text-white/90 text-sm md:text-base">Jutsus especiais, mensagens e surpresas te aguardam!</p>
-                    </div>
-                  </div>
 
                   <motion.button
                     className="px-4 md:px-6 py-2 md:py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium transition-colors w-full text-sm md:text-base"
