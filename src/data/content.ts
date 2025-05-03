@@ -42,7 +42,7 @@ export const galleryImages = [
   {
     src: "/fotosAmigos/19.jpg",
     alt: "Leandro Ninja",
-    caption: "Joarilo e Susandro",
+    caption: "Jorilo e Susandro",
   },
   {
     src: "/fotosAmigos/11.jpg",
@@ -99,12 +99,20 @@ Leandro, embora eu tenha te conhecido há pouco tempo, não poderia deixar de re
 Que sua vida seja sempre repleta de saúde, alegria e muitas realizações. Continue sendo essa pessoa maravilhosa que todos nós gostamos de ter por perto. Em breve você virá tomar um café conosco, nos 3 desta vez. Um beijo (na boca) e um abraço da Naelhy e do Benjamin.`,
   },
   {
-    name: "Joanice",
-    message: "",
+    name: "Jonice Baraúna",
+    message: "Vida longa àquele que me tornou tia aos 3 anos de idade😅. Feliz aniversário meu sobrinho,sou muito grata pela sua linda vida,e muito orgulhosa pelas suas escolhas. Que Deus te abençõe!",
   },
   {
     name: "Murilo",
-    message: "",
+    message: `Feliz aniversário Leandrinho, muitos anos de vida e que você continue sendo esse jovem trabalhador e esforçado que és, parabéns por mais 1 ano de vida e que venham ainda mais conquistas pela frente.
+
+De seu querido Tio 😘.
+
+`,
+  },
+  {
+    name: "Susan Nunes Monteiro",
+    message: ``,
   },
 ];
 
