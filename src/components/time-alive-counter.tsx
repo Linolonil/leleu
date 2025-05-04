@@ -3,11 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
-type TimeAliveProps = {
-  birthDate: string 
-}
-
-type TimeUnits = {
+type TimeAlive = {
   years: number
   months: number
   days: number
@@ -16,90 +12,83 @@ type TimeUnits = {
   seconds: number
 }
 
-export function TimeAliveCounter({ birthDate }: TimeAliveProps) {
-  const [timeAlive, setTimeAlive] = useState<TimeUnits>({
+export function TimeAliveCounter() {
+  const [timeAlive, setTimeAlive] = useState<TimeAlive>({
     years: 0,
     months: 0,
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    seconds: 0
   })
 
   useEffect(() => {
-    const birthDateTime = new Date(birthDate)
-    const targetDate = new Date("2025-05-04") // Data do 29º aniversário
-
-    const calculateTimeAlive = (now: Date) => {
-      const endDate = now < targetDate ? now : targetDate
+    // Data de nascimento: 4 de maio de 1996, 00:00 em Manaus (UTC-4)
+    const birthDate = new Date("1996-05-04T00:00:00-04:00")
+    
+    const calculateTimeAlive = () => {
+      const now = new Date()
       
-      // Cálculo preciso considerando o horário de nascimento
-      let years = endDate.getFullYear() - birthDateTime.getFullYear()
-      let months = endDate.getMonth() - birthDateTime.getMonth()
-      let days = endDate.getDate() - birthDateTime.getDate()
-
-      // Ajuste para horário de nascimento
-      const birthHours = birthDateTime.getHours()
-      const birthMinutes = birthDateTime.getMinutes()
-      const currentHours = endDate.getHours()
-      const currentMinutes = endDate.getMinutes()
-
-      // Se ainda não passou do horário de nascimento no dia atual, subtrai 1 dia
-      if (currentHours < birthHours || (currentHours === birthHours && currentMinutes < birthMinutes)) {
-        days--
-      }
-
-      // Ajusta anos e meses se necessário
-      if (months < 0 || (months === 0 && days < 0)) {
+      // Cálculo básico de anos
+      let years = now.getFullYear() - birthDate.getFullYear()
+      
+      // Verifica se já fez aniversário este ano
+      const currentMonth = now.getMonth()
+      const birthMonth = birthDate.getMonth()
+      const currentDay = now.getDate()
+      const birthDay = birthDate.getDate()
+      
+      if (currentMonth < birthMonth || (currentMonth === birthMonth && currentDay < birthDay)) {
         years--
-        months += 12
       }
-
-      // Ajusta dias negativos
-      if (days < 0) {
-        const lastDayOfPrevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0).getDate()
-        days += lastDayOfPrevMonth
+      
+      // Data do último aniversário
+      const lastBirthday = new Date(birthDate)
+      lastBirthday.setFullYear(now.getFullYear())
+      
+      if (now < lastBirthday) {
+        lastBirthday.setFullYear(now.getFullYear() - 1)
+      }
+      
+      // Calcula meses desde o último aniversário
+      let months = (now.getFullYear() - lastBirthday.getFullYear()) * 12
+      months += now.getMonth() - lastBirthday.getMonth()
+      
+      // Ajusta se o dia atual é anterior ao dia do aniversário
+      if (now.getDate() < lastBirthday.getDate()) {
         months--
       }
-
-      // Calcula horas, minutos e segundos desde o horário de nascimento
-      let hours = currentHours - birthHours
-      let minutes = currentMinutes - birthMinutes
-      let seconds = endDate.getSeconds() - birthDateTime.getSeconds()
-
-      // Ajusta valores negativos
-      if (seconds < 0) {
-        minutes--
-        seconds += 60
-      }
-      if (minutes < 0) {
-        hours--
-        minutes += 60
-      }
-      if (hours < 0) {
-        days--
-        hours += 24
-      }
-
+      
+      // Calcula dias desde o início do período atual
+      const startDate = new Date(lastBirthday)
+      startDate.setMonth(lastBirthday.getMonth() + months)
+      
+      let days = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+      
+      // Calcula horas, minutos e segundos do dia atual
+      const hours = now.getHours()
+      const minutes = now.getMinutes()
+      const seconds = now.getSeconds()
+      
       return {
         years,
         months,
         days,
         hours,
         minutes,
-        seconds,
+        seconds
       }
     }
 
     const updateCounter = () => {
-      setTimeAlive(calculateTimeAlive(new Date()))
+      setTimeAlive(calculateTimeAlive())
     }
 
     updateCounter()
     const interval = setInterval(updateCounter, 1000)
 
     return () => clearInterval(interval)
-  }, [birthDate])
+  }, [])
 
   const timeUnits = [
     { label: "Anos", value: timeAlive.years },

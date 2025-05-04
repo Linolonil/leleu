@@ -112,7 +112,9 @@ De seu querido Tio 😘.
   },
   {
     name: "Susan Nunes Monteiro",
-    message: ``,
+    message: `Feliz aniversário, meu grande amor! 
+Agradeço a Deus por poder dividir minha vida com você, e sempre peço a Ele que cuide de você e te abençoe com tudo que há de melhor! Você é forte, determinado, corajoso, inteligente, maduro… às vezes olho pra você e penso que não há nada que você não consiga fazer, porque pra mim você pode tudo! E mesmo com toda a bagagem de pessoa adulta que carrega, você é uma eterna criança risonha (que ri e que sonha kkkk, não resisti a piadoca), que precisa de tão pouco pra se divertir, eu admiro tanto isso! 
+Que você seja muito feliz, meu amor! Que Deus te abençoe com tudo que você deseja e precisa, você merece todas coisas mais lindas desse mundo. Eu amo cada pedacinho seu, sou muito feliz ao seu lado!`,
   },
 ];
 

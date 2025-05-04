@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { Play, Pause, Volume2, VolumeX } from "lucide-react"
+import { Play, Pause, Volume2, VolumeX, Maximize2, Minimize2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
@@ -16,7 +16,9 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -38,6 +40,20 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
     }
   }
 
+  const toggleFullscreen = () => {
+    if (!containerRef.current) return
+
+    if (!isFullscreen) {
+      if (containerRef.current.requestFullscreen) {
+        containerRef.current.requestFullscreen()
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      }
+    }
+  }
+
   const updateProgress = () => {
     if (videoRef.current) {
       const value = (videoRef.current.currentTime / videoRef.current.duration) * 100
@@ -47,22 +63,31 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
 
   useEffect(() => {
     const videoElement = videoRef.current
+    const containerElement = containerRef.current
+
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
 
     if (videoElement) {
       videoElement.addEventListener("timeupdate", updateProgress)
       videoElement.addEventListener("ended", () => setIsPlaying(false))
     }
 
+    document.addEventListener("fullscreenchange", handleFullscreenChange)
+
     return () => {
       if (videoElement) {
         videoElement.removeEventListener("timeupdate", updateProgress)
         videoElement.removeEventListener("ended", () => setIsPlaying(false))
       }
+      document.removeEventListener("fullscreenchange", handleFullscreenChange)
     }
   }, [])
 
   return (
     <motion.div
+      ref={containerRef}
       className={`relative rounded-xl overflow-hidden shadow-lg ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -76,10 +101,10 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
 
       <video
         ref={videoRef}
-        className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-cover cursor-pointer"
+        className="w-full h-auto max-h-[80vh] object-contain cursor-pointer"
         poster={poster}
         onClick={togglePlay}
-        muted
+        muted={isMuted}
       >
         <source src={src} type="video/mp4" />
         Seu navegador não suporta vídeos.
@@ -116,6 +141,10 @@ export function VideoPlayer({ src, poster, title, className = "" }: VideoPlayerP
         <div className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
           <div className="h-full bg-orange-500" style={{ width: `${progress}%` }} />
         </div>
+
+        <Button variant="ghost" size="icon" className="text-white hover:bg-white/20" onClick={toggleFullscreen}>
+          {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+        </Button>
       </div>
     </motion.div>
   )

@@ -32,7 +32,6 @@ export function MemoryTimeline({ events }: MemoryTimelineProps) {
             {/* Content */}
             <div className={`w-1/2 ${index % 2 === 0 ? "pr-8 text-right" : "pl-8"}`}>
               <h3 className="text-xl font-bold text-orange-300 mb-1">{event.title}</h3>
-              <p className="text-sm text-orange-200/70 mb-2">{event.date}</p>
               <p className="text-white/80">{event.description}</p>
             </div>
 

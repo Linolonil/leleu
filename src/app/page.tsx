@@ -105,7 +105,7 @@ function MainContent() {
         <div className="max-w-3xl mx-auto">
           <VideoPlayer
             src="/leandroUFAM.mp4"
-            title="Um videozinho do Leandro de forma espontanea"
+            title="Um videozinho de parabéns para o Leandrooooo (tem musica)"
           />
         </div>
       </div>
@@ -147,11 +147,10 @@ function MainContent() {
       >
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Tempo de Vida Ninja</h2>
         <p className="text-white/80 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
-          Nosso ninja Leandro está neste mundo desde 4 de maio de 1995, acumulando poder e sabedoria a cada segundo!
+          Nosso ninja Leandro está neste mundo desde 4 de maio de 1996, acumulando poder e sabedoria a cada segundo!
         </p>
 
-        <TimeAliveCounter birthDate="1996-05-04" />
-      </motion.div>
+        <TimeAliveCounter />  </motion.div>
 
     </main>
   )
